@@ -28,7 +28,7 @@ import com.example.holden.entity.CertificateShare;
 
 @RestController
 @RequestMapping("/api/certificates")
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5173"})
+@CrossOrigin(origins = {"https://holdenproject.netlify.app", "http://localhost:3000", "http://localhost:5173"})
 public class CertificateController {
 
     private final CertificateService service;

@@ -17,7 +17,7 @@ import com.example.holden.service.AuthService;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5173"})
+@CrossOrigin(origins = {"https://holdenproject.netlify.app", "http://localhost:3000", "http://localhost:5173"})
 public class AuthController {
 
     private final AuthService authService;
