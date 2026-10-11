@@ -100,4 +100,27 @@ public class AuthController {
             ));
         }
     }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestBody Map<String, String> body) {
+        try {
+            String username = body.get("username");
+            String newPassword = body.get("newPassword");
+            User user = authService.updatePassword(username, newPassword);
+            return ResponseEntity.ok(Map.of(
+                    "success", true,
+                    "message", "Password updated successfully for " + user.getUsername()
+            ));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(Map.of(
+                    "success", false,
+                    "message", e.getMessage()
+            ));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(
+                    "success", false,
+                    "message", "Error updating password."
+            ));
+        }
+    }
 }

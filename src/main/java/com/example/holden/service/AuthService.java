@@ -88,4 +88,18 @@ public class AuthService {
         }
         return userRepository.findByUsername(username.trim().toLowerCase()).isPresent();
     }
+
+    public User updatePassword(String username, String newPassword) {
+        if (username == null || username.trim().isEmpty()) {
+            throw new IllegalArgumentException("Username is required.");
+        }
+        if (newPassword == null || newPassword.length() < 6) {
+            throw new IllegalArgumentException("Password must contain at least 6 characters.");
+        }
+        String cleanUsername = username.trim().toLowerCase();
+        User user = userRepository.findByUsername(cleanUsername)
+                .orElseThrow(() -> new IllegalArgumentException("User not found."));
+        user.setPassword(passwordEncoder.encode(newPassword));
+        return userRepository.save(user);
+    }
 }
